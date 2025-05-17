@@ -1,3 +1,5 @@
+@import 'simplelightbox/dist/simple-lightbox.min.css';
+
 .gallery {
   display: flex;
   justify-content: center;
@@ -30,5 +32,22 @@
 .lightbox-image {
   height: calc(100vh - 56px);
   opacity: 1;
-  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  transition:
+    transform 0.5s ease-in-out,
+    opacity 0.5s ease-in-out;
+}
+
+/* Lightbox customization */
+.sl-wrapper {
+  background-color: rgba(46, 47, 66, 0.8);
+}
+
+.sl-wrapper .sl-close,
+.sl-wrapper .sl-counter,
+.sl-wrapper .sl-navigation button {
+  color: white;
+}
+
+.sl-spinner {
+  border: 5px solid white;
 }
