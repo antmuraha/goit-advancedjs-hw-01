@@ -4,7 +4,8 @@ import { defineConfig } from 'vite';
 
 const __dirname = dirname(fileURLToPath(import.meta.url)) + '/src';
 
-export default defineConfig({
+export default defineConfig(({ command, mode }) => ({
+  base: mode === 'production' ? './' : '/',
   define: {
     global: {},
   },
@@ -19,4 +20,4 @@ export default defineConfig({
       },
     },
   },
-});
+}));
