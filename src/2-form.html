@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <title>Homework 1: From</title>
+    <link rel="stylesheet" href="./css/2-form.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,500&display=swap"
+      rel="preload"
+      as="style"
+    />
+  </head>
+  <body>
+    <div id="app"></div>
+    <form
+      class="feedback-form"
+      action="http://localhost:8000/submit"
+      method="POST"
+      data-validate-message="Fill please all fields"
+      data-autosave="true"
+      data-restore-key="feedback-form-state"
+    >
+      <label class="feedback-form__field">
+        <span class="feedback-form__label">Email</span>
+        <input
+          type="email"
+          name="email"
+          autocomplete="off"
+          class="feedback-form__input"
+          placeholder="Email"
+          required
+          message_="Please enter a valid email address"
+        />
+      </label>
+      <label class="feedback-form__field">
+        <span class="feedback-form__label">Message</span>
+        <textarea
+          name="message"
+          class="feedback-form__textarea"
+          placeholder="Message"
+          required
+          message_="Please enter a message"
+        ></textarea>
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+    <script type="module">
+      import formInit from './js/2-form.js';
+      formInit(document.querySelector('.feedback-form'));
+    </script>
+  </body>
+</html>
