@@ -5,7 +5,8 @@ import { defineConfig } from 'vite';
 const __dirname = dirname(fileURLToPath(import.meta.url)) + '/src';
 
 export default defineConfig(({ command, mode }) => ({
-  base: mode === 'production' ? './' : '/',
+  // Does not pass auto-check
+  base: mode === 'production' ? '/goit-advancedjs-hw-01/' : '/',
   define: {
     global: {},
   },

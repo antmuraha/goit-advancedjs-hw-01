@@ -134,4 +134,6 @@ function formInitialization(form) {
   });
 }
 
-export default formInitialization;
+// Does not pass auto-check
+// export default formInitialization;
+formInitialization(document.querySelector('.feedback-form'));
