@@ -13,9 +13,9 @@
       rel="preload"
       as="style"
     />
-    <script type="module" crossorigin src="/goit-advancedjs-hw-01/assets/2-form-BHcVbVJI.js"></script>
-    <link rel="modulepreload" crossorigin href="/goit-advancedjs-hw-01/assets/modulepreload-polyfill-B5Qt9EMX.js">
-    <link rel="stylesheet" crossorigin href="/goit-advancedjs-hw-01/assets/2-form-D_bCUWf5.css">
+    <script type="module" crossorigin src="/goit-advancedjs-hw-01/assets/2-form-CLm6lO2O.js"></script>
+    <link rel="modulepreload" crossorigin href="/goit-advancedjs-hw-01/assets/_commonjsHelpers-B-UnjaXt.js">
+    <link rel="stylesheet" crossorigin href="/goit-advancedjs-hw-01/assets/2-form-i8UjXj3D.css">
   </head>
   <body>
     <div id="app"></div>
@@ -33,9 +33,10 @@
           type="email"
           name="email"
           autocomplete="off"
+          autofocus
           class="feedback-form__input"
           placeholder="Email"
-          required
+          data-required="true"
           message_="Please enter a valid email address"
         />
       </label>
@@ -45,7 +46,7 @@
           name="message"
           class="feedback-form__textarea"
           placeholder="Message"
-          required
+          data-required="true"
           message_="Please enter a message"
         ></textarea>
       </label>
