@@ -6,7 +6,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url)) + '/src';
 
 export default defineConfig(({ command, mode }) => ({
   // Does not pass auto-check
-  base: mode === 'production' ? '/goit-advancedjs-hw-01/' : '/',
+  base: mode === 'production' ? 'https://antmuraha.github.io/goit-advancedjs-hw-01/' : '/',
   define: {
     global: {},
   },
