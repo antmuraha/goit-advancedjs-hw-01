@@ -1,8 +1,30 @@
 /**
  * @description This module handles form initialization and validation.
  */
-
+import toastr from 'js-toastr';
 import FormStorage from './form-storage';
+
+const formData = { email: '', message: '' };
+
+/**
+ * @param {HTMLFormElement} form
+ * @param {FormData} data
+ * @returns
+ */
+function validateForm(form, data) {
+  let isValid = true;
+  const formDataObject = Object.fromEntries(data.entries());
+  for (const [key, value] of Object.entries(formDataObject)) {
+    const input = form.querySelector(`[name="${key}"]`);
+    const isRequired = 'required' in input?.dataset;
+
+    if (input && isRequired && 'value' in input && !value) {
+      isValid = false;
+    }
+  }
+
+  return isValid;
+}
 
 /**
  *
@@ -17,6 +39,7 @@ function restoreFormData(form, storage) {
     const input = form.querySelector(`[name="${key}"]`);
     if (input && 'value' in input) {
       input.value = value;
+      formData[key] = value;
     }
   }
 }
@@ -59,20 +82,14 @@ function formInitialization(form) {
     if (clean) {
       form.reset();
     }
-    // Add default validity message to all inputs and textareas
-    form.querySelectorAll('input, textarea').forEach(input => {
-      if (!input.value) {
-        input.setCustomValidity(formValidateMessage);
-      }
-    });
   }
 
   resetFormState(form);
 
   function successCallback(form) {
-    console.log('Form submitted successfully');
-    const formData = new FormData(form);
-    const formDataObject = Object.fromEntries(formData.entries());
+    toastr.message('Form submitted successfully');
+    const data = new FormData(form);
+    const formDataObject = Object.fromEntries(data.entries());
     console.log('Form Data', formDataObject);
     storage.clean();
     resetFormState(form, true);
@@ -80,13 +97,18 @@ function formInitialization(form) {
 
   form.addEventListener('submit', async event => {
     event.preventDefault();
-    const formData = new FormData(form);
+    const data = new FormData(form);
+
+    if (!validateForm(form, data)) {
+      toastr.message(formValidateMessage);
+      return;
+    }
 
     try {
       // Send the form data to the server
       const response = await fetch(formAction, {
         method: formMethod,
-        body: formData,
+        body: data,
         headers: {
           'Content-Type': formEnctype,
         },
@@ -114,8 +136,6 @@ function formInitialization(form) {
     if (input?.validity?.valid) {
       input.setCustomValidity('');
       input.classList.remove('error');
-    } else if (input?.validity?.valueMissing) {
-      input.setCustomValidity(formValidateMessage);
     } else if (input?.validity?.typeMismatch) {
       input.setCustomValidity('');
       if (input.value) {
@@ -125,6 +145,12 @@ function formInitialization(form) {
       }
     } else {
       input.setCustomValidity('');
+    }
+
+    const name = input.getAttribute('name');
+    const value = input.value;
+    if (name) {
+      formData[name] = value;
     }
 
     // Save form data to local storage
@@ -137,3 +163,5 @@ function formInitialization(form) {
 // Does not pass auto-check
 // export default formInitialization;
 formInitialization(document.querySelector('.feedback-form'));
+
+toastr.message('Please fill out the feedback form');
