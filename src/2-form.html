@@ -31,9 +31,10 @@
           type="email"
           name="email"
           autocomplete="off"
+          autofocus
           class="feedback-form__input"
           placeholder="Email"
-          required
+          data-required="true"
           message_="Please enter a valid email address"
         />
       </label>
@@ -43,7 +44,7 @@
           name="message"
           class="feedback-form__textarea"
           placeholder="Message"
-          required
+          data-required="true"
           message_="Please enter a message"
         ></textarea>
       </label>
